@@ -14,9 +14,9 @@ jobs:
 
       - name: yml 생성
         run: |
+          mkdir ./src/main/resources
           cd ./src/main/resources
           touch ./application.yml
-
 
       - name: secrets에 있는 APPLICATION 내용을 yml 파일에 덮어쓰기
         run: echo "${{secrets.APPLICATION}}" > ./src/main/resources/application.yml
