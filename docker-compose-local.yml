@@ -5,7 +5,7 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./database
-    image: sieunp06/dailicorns-database
+    image: sieun06/dailicorns-database
     environment:
       - MARIADB_DATABASE=dailicorns
       - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
