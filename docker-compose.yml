@@ -1,0 +1,29 @@
+version: "3.8"
+services:
+  dailicorns-database:
+    container_name: dailicorns-database
+    build:
+      dockerfile: Dockerfile
+      context: ./database
+    image: sieunp06/dailicorns-database
+    environment:
+      - MARIADB_DATABASE=dailicorns
+      - MARIADB_ROOT_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+    volumes:
+      - ./database/config:/etc/mysql/conf.d
+    ports:
+      - "3306:3306"
+  dailicorns-app:
+    container_name: dailicorns-app
+    build: .
+    depends_on:
+      - dailicorns-database
+    image: sieunp06/dailicorns-app
+    environment:
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+      - SPRING_PROFILES_ACTIVE=${SPRING_PROFILES_ACTIVE}
+    ports:
+      - "80:8080"
+    restart: always
+
