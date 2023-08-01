@@ -64,7 +64,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           timeout: 180s
           script: |
-            sudo docker rm -f $(docker ps -qa)
-            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/dailicorns-server
+            docker rm -f $(docker ps -qa)
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/dailicorns-server
+            docker pull ${{ secrets.DOCKER_USERNAME }}/dailicorns-server
             docker-compose up -d
-            docker image prune -f
