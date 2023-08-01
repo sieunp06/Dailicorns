@@ -64,6 +64,7 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           timeout: 180s
           script: |
+            sudo docker stop dailicorns
             sudo docker rm -f $(docker ps -qa)
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/dailicorns-server
             docker run -d -p 80:8080 --name dailicorns ${{ secrets.DOCKER_USERNAME }}/dailicorns-server:latest
