@@ -64,7 +64,8 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           timeout: 180s
           script: |
-            docker rm -f $(docker ps -qa)
-            docker rmi ${{ secrets.DOCKER_USERNAME }}/dailicorns-server
-            docker pull ${{ secrets.DOCKER_USERNAME }}/dailicorns-server
-            docker-compose up -d
+            sudo docker rm -f $(docker ps -qa)
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/dailicorns-server
+            docker run -d -p 80:8080 --name dailicorns ${{ secrets.DOCKER_USERNAME }}/dailicorns-server:latest
+            
+            
